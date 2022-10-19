@@ -43,8 +43,6 @@ const Tabs: React.FunctionComponent<TabsProps> = ({
     setIfranme(srcDoc)
   }, [htmlCode, cssCode, js]);
 
-  console.log('iframe', htmlCode, cssCode, js)
-
   const onChangeHtml = React.useCallback((value: string, viewUpdate: any) => {
     setHtml(value)
   }, []);

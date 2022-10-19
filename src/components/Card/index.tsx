@@ -1,6 +1,10 @@
 import React from "react";
 
-const Card = () => {
+type CardProps = {
+  tag: string
+};
+
+const Card: React.FunctionComponent<CardProps> = ({tag}) => {
 
     const htmlTab = {
         id: "HTML",
@@ -90,7 +94,7 @@ const Card = () => {
 
     const typeColor = (type : string) => {
       switch (type) {
-        case "Nav Bar":
+        case "NavBar":
           return 'tag-teal'
           break;
         case 'Inputs':
@@ -125,7 +129,7 @@ const Card = () => {
           />
         </div>
         <div className="card-body">
-          <span className={`tag ${typeColor(obj.type)}`}>{obj.type}</span>
+          <span className={`tag ${typeColor(tag)}`}>{tag}</span>
           <h4>{obj.content}</h4>
         </div>
       </div>

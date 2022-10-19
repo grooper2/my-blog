@@ -1,17 +1,20 @@
-import React, { useContext, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useLocation, useParams, useSearchParams } from "react-router-dom";
+import DropDown from "../../components/Button/dropDown";
 import Card from "../../components/Card";
 import SearchInput from "../../components/Input/SearchInput";
 import Tabs from "../../components/Tabs";
 import { ComponentContext } from "../../context/componentProvider";
 
 function Library() {
-  const { components, setComponents } = useContext(ComponentContext);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [sortedComponents, setSortedComponents] = useState([]);
+  const { setComponents } = useContext(ComponentContext);
 
   const dummyData = [
     {
       id: "werqwe-213dqwe-qw234-qfwefq",
-      htmlTab : {
+      htmlTab: {
         id: "HTML",
         language: "html",
         value: `
@@ -86,36 +89,73 @@ function Library() {
         language: "javascript",
         value: "document.body.style.backgroundColor = '#494949'; ",
       },
+      tag: "Inputs",
     },
-    { id: "we9rqwe-213234dqwe-qw234-qfwefq" },
-    { id: "wer6qwe-213dqwe-qw234-qwewefq" },
-    { id: "we34rqwe-213d34we-qw234-qfwefq" },
-    { id: "6werqwe-213dq234we-qw234-qfwefq" },
-    { id: "werq4we-213dq1we-qw234-qfw45efq" },
-    { id: "we423qwe-213dqwe-qw25534-qfwefq" },
-    { id: "werq45we-213dqwe-qw234-qfwefq" },
-    { id: "we123rqwe-213dqwe-qw234-qfwefq" },
+    { id: "we9rqwe-213234dqwe-qw234-qfwefq", tag: "Inputs" },
+    { id: "wer6qwe-213dqwe-qw234-qwewefq", tag: "Animations" },
+    { id: "we34rqwe-213d34we-qw234-qfwefq", tag: "Inputs" },
+    { id: "6werqwe-213dq234we-qw234-qfwefq", tag: "Cards" },
+    { id: "werq4we-213dq1we-qw234-qfw45efq", tag: "NavBar" },
+    { id: "we423qwe-213dqwe-qw25534-qfwefq", tag: "Animations" },
+    { id: "werq45we-213dqwe-qw234-qfwefq", tag: "Inputs" },
+    { id: "we123rqwe-213dqwe-qw234-qfwefq", tag: "Cards" },
   ];
+
+  const dropOptions = ["NavBar", "Inputs", "Animations", "Cards"];
+
+  const tag = searchParams.get('tag')
+
+  useEffect(() => {
+    let arr = [];
+    dummyData.map((data) => {
+      if (!!tag && data.tag === tag) {
+         return arr.push(data);
+      }
+      return
+    });
+    setSortedComponents(arr);
+  }, [tag]);
 
   return (
     <div className="library-body">
-      <SearchInput />
-      <div className="library-content">
-        <h3>Most recent components:</h3>
+      <div className="library-row">
+        <div className="btn-container">
+          <button className="btnOutline white">Create Component</button>
+        </div>
+        <SearchInput />
+        <div className="btn-container">
+          <DropDown name="Sort Components" dropOptions={dropOptions} />
+        </div>
       </div>
       <div className="card-container">
-        {dummyData.map((data) => (
-          <Link
-            className="clickable-container"
-            key={data.id}
-            to={`/library/${data.id}`}
-            onClick={() => setComponents(data)}
-          >
-            <Card />
-          </Link>
-        ))}
+        {!!tag === false ? (
+          <>
+            {dummyData.map((data) => (
+              <Link
+                className="clickable-container"
+                key={data.id}
+                to={`/library/${data.id}`}
+                onClick={() => setComponents(data)}
+              >
+                <Card tag={data.tag} />
+              </Link>
+            ))}
+          </>
+        ) : (
+          <>
+            {sortedComponents.map((data) => (
+              <Link
+                className="clickable-container"
+                key={data.id}
+                to={`/library/${data.id}`}
+                onClick={() => setComponents(data)}
+              >
+                <Card tag={data.tag} />
+              </Link>
+            ))}
+          </>
+        )}
       </div>
-      {/* <Tabs /> */}
     </div>
   );
 }
