@@ -8,7 +8,7 @@ function NavBar() {
       <nav className="menu">
         <Link to="/">Home</Link>
         <Link to="about">About</Link>
-        <Link to="Library">Library</Link>
+        <Link to="library">Library</Link>
         <Link to="/">Logout</Link>
       </nav>
     </details>

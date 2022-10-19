@@ -1,72 +1,126 @@
-import React, { useState } from "react";
-import IDE from "../IDEComponent";
+import { type } from "@testing-library/user-event/dist/type";
+import React, { useEffect, useState } from "react";
+import CodeMirror from "@uiw/react-codemirror";
+import { githubDark } from "@uiw/codemirror-theme-github";
+import { javascript } from "@codemirror/lang-javascript";
+import { css } from "@codemirror/lang-css";
+import { html } from "@codemirror/lang-html";
 
-function Tabs() {
-  const [html, setHtml] = useState("");
-  const [css, setCss] = useState("");
-  const [js, setJs] = useState("");
+type TabsProps = {
+  htmlValue: string;
+  htmlLanguage: string;
+  cssValue: string;
+  cssLanguage: string;
+  jsValue: string;
+  jsLanguage: string;
+};
 
-  const ideTabs = [
-    {
-      id: "HTML",
-      language: "xml",
-      value: "<input className='something' type='something />",
-    },
-    {
-      id: "CSS",
-      language: "css",
-      value: "<input className='css' type='something />",
-    },
-    {
-      id: "JS",
-      language: "javascript",
-      value: "<input className='js' type='something />",
-    },
-  ];
+const Tabs: React.FunctionComponent<TabsProps> = ({
+  htmlValue,
+  htmlLanguage,
+  cssValue,
+  cssLanguage,
+  jsValue,
+  jsLanguage,
+}) => {
+  const [htmlCode, setHtml] = useState(htmlValue || "");
+  const [cssCode, setCss] = useState(cssValue || "");
+  const [js, setJs] = useState(jsValue || "");
+  const [iframe, setIfranme] = useState(`
+  <html>
+    <body>${htmlCode}</body>
+    <style>${cssCode}</style>
+    <script>${js}</script>
+  </html>`);
 
-  const srcDoc = (
+  useEffect(() => {
+    const srcDoc = `
     <html>
-      <body>${html}</body>
-      <style>${css}</style>
+      <body>${htmlCode}</body>
+      <style>${cssCode}</style>
       <script>${js}</script>
-    </html>
-  );
+    </html>`;
+    setIfranme(srcDoc)
+  }, [htmlCode, cssCode, js]);
 
-  const setLanguage = (lan: string) => {
-    if (lan === 'xml') {
-        return setHtml
-    }else if(lan === 'css'){
-        return setCss
-    }else if(lan === 'javascript'){
-        return setJs
-    }
-  }
+  console.log('iframe', htmlCode, cssCode, js)
+
+  const onChangeHtml = React.useCallback((value: string, viewUpdate: any) => {
+    setHtml(value)
+  }, []);
+
+  const onChangeCss = React.useCallback((value: string, viewUpdate: any) => {
+    setCss(value)
+  }, []);
+
+  const onChangeJs = React.useCallback((value: string, viewUpdate: any) => {
+    setJs(value)
+  }, []);
 
   return (
-    <div className="tabset">
-      <input
-        type="radio"
-        name="tabset"
-        id="tab1"
-        aria-controls="HTML"
-        checked
-      />
-      <label htmlFor="tab1">HTML</label>
+    <div>
+      <div className="tabset">
+        <input
+          type="radio"
+          name="tabset"
+          id="tab1"
+          aria-controls="HTML"
+          defaultChecked={true}
+        />
+        <label htmlFor="tab1">HTML</label>
 
-      <input type="radio" name="tabset" id="tab2" aria-controls="CSS" />
-      <label htmlFor="tab2">CSS</label>
+        <input type="radio" name="tabset" id="tab2" aria-controls="CSS" />
+        <label htmlFor="tab2">CSS</label>
 
-      <input type="radio" name="tabset" id="tab3" aria-controls="JS" />
-      <label htmlFor="tab3">JS</label>
-      <div className="tab-panels">
-        {ideTabs.map((tab) => (
-          <section key={tab.id} id={tab.id} className="tab-panel">
-            <IDE language={tab.language} value={tab.value} onChange={setLanguage(tab.language)}/>
+        <input type="radio" name="tabset" id="tab3" aria-controls="JS" />
+        <label htmlFor="tab3">JS</label>
+        <div className="tab-panels">
+          <section className="tab-panel">
+            <CodeMirror 
+              onChange={onChangeHtml}
+              value={htmlCode}
+              height="600px"
+              width="900px"
+              theme={githubDark}
+              extensions={[html()]}
+            />
           </section>
-        ))}
+          <section className="tab-panel">
+          <CodeMirror 
+              onChange={onChangeCss}
+              value={cssCode}
+              height="600px"
+              width="900px"
+              theme={githubDark}
+              extensions={[css()]}
+            />
+          </section>
+          <section className="tab-panel">
+          <CodeMirror 
+              onChange={onChangeJs}
+              value={js}
+              height="600px"
+              width="900px"
+              theme={githubDark}
+              extensions={[javascript({ jsx: false })]}
+            />
+          </section>
+        </div>
       </div>
+      <div className="pane">
+        <iframe
+          srcDoc={iframe}
+          title="output"
+          frameBorder="0"
+          sandbox="allow-scripts"
+          width="100%"
+          height="100%"
+          style={{background: '#fff'}}
+        />
+      </div>
+      <br />
     </div>
   );
-}
+};
 
 export default Tabs;
