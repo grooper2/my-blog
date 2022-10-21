@@ -38,11 +38,8 @@ const ComponentsPage = () => {
     <div className="library-body">
       <Tabs
         htmlValue={formatter(htmlTab?.value, 'html') || initialHtml}
-        htmlLanguage={htmlTab?.language}
         cssValue={formatter(cssTab?.value, 'css') || initialCss}
-        cssLanguage={cssTab?.language}
         jsValue={formatter(jsTab?.value, 'js') || initialJs}
-        jsLanguage={jsTab?.language}
       />
     </div>
   );

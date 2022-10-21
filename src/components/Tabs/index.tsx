@@ -8,20 +8,17 @@ import { html } from "@codemirror/lang-html";
 
 type TabsProps = {
   htmlValue: string;
-  htmlLanguage: string;
   cssValue: string;
-  cssLanguage: string;
   jsValue: string;
-  jsLanguage: string;
 };
 
 const Tabs: React.FunctionComponent<TabsProps> = ({
   htmlValue,
-  htmlLanguage,
+
   cssValue,
-  cssLanguage,
+
   jsValue,
-  jsLanguage,
+
 }) => {
   const [htmlCode, setHtml] = useState(htmlValue || "");
   const [cssCode, setCss] = useState(cssValue || "");

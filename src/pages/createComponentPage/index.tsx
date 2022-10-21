@@ -46,11 +46,8 @@ const CreateComponentPage = () => {
       {isAddingTag && <TagForm />}
       <Tabs
         htmlValue=""
-        htmlLanguage="html"
         cssValue=""
-        cssLanguage="css"
         jsValue=""
-        jsLanguage="javascript"
       />
       <button className="btnYellow">Submit</button>
     </div>
