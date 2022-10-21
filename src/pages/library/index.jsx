@@ -120,11 +120,11 @@ function Library() {
     <div className="library-body">
       <div className="library-row">
         <div className="btn-container">
-          <button className="btnOutline white">Create Component</button>
+          <Link to="/create_component"><button className="btnYellow">Create Component</button></Link>
         </div>
         <SearchInput />
         <div className="btn-container">
-          <DropDown name="Sort Components" dropOptions={dropOptions} />
+          <DropDown name="Sort Components" dropOptions={dropOptions} isSorting/>
         </div>
       </div>
       <div className="card-container">

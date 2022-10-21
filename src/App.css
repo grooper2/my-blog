@@ -13,7 +13,7 @@ body {
   color: aliceblue;
   height: 100%;
   overflow-y: auto;
-  background: #41465B;
+  background: #41465b;
 }
 
 .App {
@@ -229,19 +229,49 @@ details[open]::before {
   border-radius: 4px;
 }
 
-.white {
-  border: 2px solid var(--thirdColor);
-  color: var(--thirdColor);
-  background: transparent;
+.btnYellow {
+  position: relative;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 2;
+  height: 50px;
+  transition: all 200ms linear;
+  border-radius: 4px;
+  width: 220px;
+  letter-spacing: 1px;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+  -ms-flex-pack: center;
+  text-align: center;
+  border: none;
+  background-color: transparent;
+  border: 2px solid #ffeba7;
+  cursor: pointer;
+  color: #ffeba7;
+  box-shadow: 0 12px 35px 0 rgba(255, 235, 167, 0.15);
 }
 
-.btn-container{
+.btn-container {
   position: relative;
   display: flex;
   justify-content: center;
   width: 20%;
   height: auto;
   margin: auto;
+}
+
+.btn-container a {
+  text-decoration: none;
 }
 
 .btnOutline:hover {
@@ -262,10 +292,12 @@ details[open]::before {
   align-items: center;
   width: 100%;
   height: 100%;
+  gap: 20px;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-.library-row{
+.library-row {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -350,6 +382,10 @@ details[open]::before {
 
 /* tabs */
 
+.Ide {
+  width: 50%;
+}
+
 .tabset > input[type="radio"] {
   position: absolute;
   left: -200vw;
@@ -366,6 +402,7 @@ details[open]::before {
 .tabset > input:nth-child(9):checked ~ .tab-panels > .tab-panel:nth-child(5),
 .tabset > input:nth-child(11):checked ~ .tab-panels > .tab-panel:nth-child(6) {
   display: block;
+  width: 100%;
 }
 
 .tabset > label {
@@ -407,6 +444,7 @@ details[open]::before {
 }
 
 .tab-panel {
+  width: 100%;
   padding: 30px 0;
   border-top: 1px solid #ccc;
 }
@@ -416,7 +454,6 @@ details[open]::before {
   display: flex;
   flex-direction: row;
 }
-
 
 /* card component */
 
@@ -484,7 +521,7 @@ details[open]::before {
   color: #494949;
 }
 
-.library-content{
+.library-content {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -505,7 +542,7 @@ details[open]::before {
   padding: 30px;
 }
 
-.card-container a{
+.card-container a {
   text-decoration: none;
 }
 
@@ -523,7 +560,7 @@ details[open]::before {
   margin-bottom: 10px;
 }
 
-.sec-center{
+.sec-center {
   position: relative;
   max-width: 100%;
   text-align: center;
@@ -531,24 +568,22 @@ details[open]::before {
 }
 
 [type="checkbox"]:checked,
-[type="checkbox"]:not(:checked){
+[type="checkbox"]:not(:checked) {
   position: absolute;
   left: -9999px;
   opacity: 0;
   pointer-events: none;
 }
 
-.sec-center .for-dropdown{
+.sec-center .for-dropdown {
   background-color: #102770;
   color: #ffeba7;
-  box-shadow: 0 12px 35px 0 rgba(16,39,112,.25);
+  box-shadow: 0 12px 35px 0 rgba(16, 39, 112, 0.25);
 }
 
 .dropdown:checked + label,
-.dropdown:not(:checked) + label{
+.dropdown:not(:checked) + label {
   position: relative;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 500;
   font-size: 15px;
   line-height: 2;
   height: 50px;
@@ -573,10 +608,10 @@ details[open]::before {
   background-color: #ffeba7;
   cursor: pointer;
   color: #102770;
-  box-shadow: 0 12px 35px 0 rgba(255,235,167,.15);
+  box-shadow: 0 12px 35px 0 rgba(255, 235, 167, 0.15);
 }
 
-.dropdown:checked + label:before{
+.dropdown:checked + label:before {
   pointer-events: auto;
 }
 .dropdown:not(:checked) + label .uil {
@@ -598,7 +633,7 @@ details[open]::before {
   width: 100%;
   border-radius: 4px;
   display: block;
-  box-shadow: 0 14px 35px 0 rgba(9,9,12,0.4);
+  box-shadow: 0 14px 35px 0 rgba(9, 9, 12, 0.4);
   z-index: 2;
   opacity: 0;
   pointer-events: none;
@@ -607,9 +642,9 @@ details[open]::before {
 }
 .dark-light:checked ~ .sec-center .section-dropdown {
   background-color: #fff;
-  box-shadow: 0 14px 35px 0 rgba(9,9,12,0.15);
+  box-shadow: 0 14px 35px 0 rgba(9, 9, 12, 0.15);
 }
-.dropdown:checked ~ .section-dropdown{
+.dropdown:checked ~ .section-dropdown {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
@@ -620,7 +655,7 @@ details[open]::before {
   left: 0;
   width: 100%;
   height: 20px;
-  content: '';
+  content: "";
   display: block;
   z-index: 1;
 }
@@ -628,12 +663,12 @@ details[open]::before {
   position: absolute;
   top: -7px;
   left: 30px;
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   border-left: 8px solid transparent;
-  border-right: 8px solid transparent; 
+  border-right: 8px solid transparent;
   border-bottom: 8px solid #111;
-  content: '';
+  content: "";
   display: block;
   z-index: 2;
   transition: all 200ms linear;
@@ -646,7 +681,7 @@ details[open]::before {
   position: relative;
   color: #fff;
   transition: all 200ms linear;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 500;
   font-size: 15px;
   border-radius: 2px;
@@ -663,7 +698,7 @@ details[open]::before {
   -ms-align-items: center;
   align-items: center;
   justify-content: space-between;
-    -ms-flex-pack: distribute;
+  -ms-flex-pack: distribute;
   cursor: pointer;
 }
 .dark-light:checked ~ .sec-center .section-dropdown a {
@@ -682,11 +717,11 @@ a .uil {
   font-size: 22px;
 }
 .dropdown-sub:checked + label,
-.dropdown-sub:not(:checked) + label{
+.dropdown-sub:not(:checked) + label {
   position: relative;
   color: #fff;
   transition: all 200ms linear;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 500;
   font-size: 15px;
   border-radius: 2px;
@@ -702,11 +737,11 @@ a .uil {
   -ms-align-items: center;
   align-items: center;
   justify-content: space-between;
-    -ms-flex-pack: distribute;
-    cursor: pointer;
+  -ms-flex-pack: distribute;
+  cursor: pointer;
 }
 .dropdown-sub:checked + label .uil,
-.dropdown-sub:not(:checked) + label .uil{
+.dropdown-sub:not(:checked) + label .uil {
   font-size: 22px;
 }
 .dropdown-sub:not(:checked) + label .uil {
@@ -717,14 +752,14 @@ a .uil {
   transition: transform 200ms linear;
 }
 .dropdown-sub:checked + label:hover,
-.dropdown-sub:not(:checked) + label:hover{
+.dropdown-sub:not(:checked) + label:hover {
   color: #102770;
   background-color: #ffeba7;
 }
-.dark-light:checked ~ .sec-center .section-dropdown .for-dropdown-sub{
+.dark-light:checked ~ .sec-center .section-dropdown .for-dropdown-sub {
   color: #102770;
 }
-.dark-light:checked ~ .sec-center .section-dropdown .for-dropdown-sub:hover{
+.dark-light:checked ~ .sec-center .section-dropdown .for-dropdown-sub:hover {
   color: #ffeba7;
   background-color: #102770;
 }
@@ -741,7 +776,7 @@ a .uil {
   overflow: hidden;
   transition: all 200ms linear;
 }
-.dropdown-sub:checked ~ .section-dropdown-sub{
+.dropdown-sub:checked ~ .section-dropdown-sub {
   pointer-events: auto;
   opacity: 1;
   max-height: 999px;
@@ -751,4 +786,65 @@ a .uil {
 }
 .section-dropdown-sub a .uil {
   font-size: 20px;
+}
+/* input field */
+.Input {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  gap: 10px;
+}
+
+.Input-text {
+  display: flex;
+  margin: 0;
+  padding: 0.8rem 1.6rem;
+  color: var(--secoColor);
+  width: auto;
+  font-family: inherit;
+  font-size: 1.2rem;
+  font-weight: inherit;
+  line-height: 0.8rem;
+  border: none;
+  border-radius: 0.4rem;
+  transition: box-shadow 300ms;
+}
+
+.Input-text::placeholder {
+  color: #b0bec5;
+}
+
+.Input-text:focus {
+  outline: none;
+  box-shadow: 0.2rem 0.8rem 1.6rem #13110a79;
+}
+
+/* create component page */
+
+.tag-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 50%;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 15px;
+}
+
+.selected-tags-row {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  height: auto;
+  gap: 10px;
+}
+
+.crossIcon {
+  transform: rotate(45deg);
+  transition: ease-in-out 300ms;
+}
+
+.crossIcon:hover {
+  cursor: pointer;
 }

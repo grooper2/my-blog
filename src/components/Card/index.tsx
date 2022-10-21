@@ -1,4 +1,5 @@
 import React from "react";
+import {hashCode , intToRGB} from "../../utils";
 
 type CardProps = {
   tag: string
@@ -90,25 +91,7 @@ const Card: React.FunctionComponent<CardProps> = ({tag}) => {
       <body>${htmlTab.value}</body>
       <style>${cssTab.value}</style>
       <script>${jsTab.value}</script>
-    </html>`;
-
-    const typeColor = (type : string) => {
-      switch (type) {
-        case "NavBar":
-          return 'tag-teal'
-          break;
-        case 'Inputs':
-          return 'tag-purple'
-          break;
-        case 'Animations':
-          return 'tag-pink'
-          break;
-        case 'Cards':
-          return 'tag-green'
-        default:
-          break;
-      }
-    }
+    </html>`
 
     const obj = {
       type: 'Inputs',
@@ -129,7 +112,7 @@ const Card: React.FunctionComponent<CardProps> = ({tag}) => {
           />
         </div>
         <div className="card-body">
-          <span className={`tag ${typeColor(tag)}`}>{tag}</span>
+          <span className="tag" style={{ background: `#${intToRGB(hashCode(tag))}`}}>{tag}</span>
           <h4>{obj.content}</h4>
         </div>
       </div>

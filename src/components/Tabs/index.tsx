@@ -40,23 +40,23 @@ const Tabs: React.FunctionComponent<TabsProps> = ({
       <style>${cssCode}</style>
       <script>${js}</script>
     </html>`;
-    setIfranme(srcDoc)
+    setIfranme(srcDoc);
   }, [htmlCode, cssCode, js]);
 
   const onChangeHtml = React.useCallback((value: string, viewUpdate: any) => {
-    setHtml(value)
+    setHtml(value);
   }, []);
 
   const onChangeCss = React.useCallback((value: string, viewUpdate: any) => {
-    setCss(value)
+    setCss(value);
   }, []);
 
   const onChangeJs = React.useCallback((value: string, viewUpdate: any) => {
-    setJs(value)
+    setJs(value);
   }, []);
 
   return (
-    <div>
+    <div className="Ide">
       <div className="tabset">
         <input
           type="radio"
@@ -74,31 +74,31 @@ const Tabs: React.FunctionComponent<TabsProps> = ({
         <label htmlFor="tab3">JS</label>
         <div className="tab-panels">
           <section className="tab-panel">
-            <CodeMirror 
+            <CodeMirror
               onChange={onChangeHtml}
               value={htmlCode}
               height="600px"
-              width="900px"
+              width="100%"
               theme={githubDark}
               extensions={[html()]}
             />
           </section>
           <section className="tab-panel">
-          <CodeMirror 
+            <CodeMirror
               onChange={onChangeCss}
               value={cssCode}
               height="600px"
-              width="900px"
+              width="100%"
               theme={githubDark}
               extensions={[css()]}
             />
           </section>
           <section className="tab-panel">
-          <CodeMirror 
+            <CodeMirror
               onChange={onChangeJs}
               value={js}
               height="600px"
-              width="900px"
+              width="100%"
               theme={githubDark}
               extensions={[javascript({ jsx: false })]}
             />
@@ -113,7 +113,7 @@ const Tabs: React.FunctionComponent<TabsProps> = ({
           sandbox="allow-scripts"
           width="100%"
           height="100%"
-          style={{background: '#fff'}}
+          style={{ background: "#fff" }}
         />
       </div>
       <br />

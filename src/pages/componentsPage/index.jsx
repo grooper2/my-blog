@@ -2,32 +2,46 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Tabs from "../../components/Tabs";
 import { ComponentContext } from "../../context/componentProvider";
+import { formatter } from "../../utils";
 
 const ComponentsPage = () => {
-  const [savedComponent, setSavedComponent] = useState(null)
+  const [savedComponent, setSavedComponent] = useState(null);
   const { components } = useContext(ComponentContext);
 
   const { cssTab, htmlTab, jsTab, id } = components;
 
-  console.log(cssTab.id === undefined)
-
   useEffect(() => {
-    if(!!components){
-      localStorage.setItem('htmlValue', htmlTab.value)
-      localStorage.setItem('cssValue', cssTab.value)
-      localStorage.setItem('jsValue', jsTab.value)
+    if (
+      htmlTab?.value !== undefined ||
+      cssTab?.value !== undefined ||
+      jsTab?.value !== undefined
+    ) {
+      sessionStorage.removeItem("htmlValue");
+      sessionStorage.removeItem("cssValue");
+      sessionStorage.removeItem("jsValue");
+      sessionStorage.setItem("htmlValue", JSON.stringify(formatter(htmlTab?.value, 'html')));
+      sessionStorage.setItem("cssValue", JSON.stringify(formatter(cssTab?.value, 'css')));
+      sessionStorage.setItem("jsValue", JSON.stringify(formatter(jsTab?.value, 'js')));
     }
-    console.log(localStorage.getItem('htmlValue'))
-  }, [])
+  }, []);
+
+  const savedHtml = sessionStorage.getItem("htmlValue");
+  const initialHtml = JSON.parse(savedHtml);
+
+  const savedCss = sessionStorage.getItem("cssValue");
+  const initialCss = JSON.parse(savedCss);
+
+  const savedJs = sessionStorage.getItem("jsValue");
+  const initialJs = JSON.parse(savedJs);
 
   return (
     <div className="library-body">
       <Tabs
-        htmlValue={htmlTab?.value}
+        htmlValue={formatter(htmlTab?.value, 'html') || initialHtml}
         htmlLanguage={htmlTab?.language}
-        cssValue={cssTab?.value}
+        cssValue={formatter(cssTab?.value, 'css') || initialCss}
         cssLanguage={cssTab?.language}
-        jsValue={jsTab?.value}
+        jsValue={formatter(jsTab?.value, 'js') || initialJs}
         jsLanguage={jsTab?.language}
       />
     </div>

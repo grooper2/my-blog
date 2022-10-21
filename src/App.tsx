@@ -5,6 +5,7 @@ import NavBar from "./components/NavBar";
 import ComponentProvider from "./context/componentProvider";
 import About from "./pages/about";
 import ComponentsPage from "./pages/componentsPage";
+import CreateComponentPage from "./pages/createComponentPage";
 import Home from "./pages/home";
 import Library from "./pages/library";
 
@@ -15,6 +16,7 @@ function App() {
         <NavBar />
         <div className="body">
           <Routes>
+            <Route path="/create_component" element={<CreateComponentPage />} />
             <Route path="/library/:id" element={<ComponentsPage />} />
             <Route path="/library" element={<Library />} />
             <Route path="/about" element={<About />} />
